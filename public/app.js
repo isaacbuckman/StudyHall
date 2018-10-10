@@ -70,6 +70,8 @@ function callPeer(peerId) {
     display(err);
   });
 
+  addVideoElement(peerId);
+  
   peer.outgoing.on('stream', function(stream) {
     display('Connected to ' + peerId + '.');
     addIncomingStream(peer, stream);
@@ -82,9 +84,17 @@ function handleIncomingCall(incoming) {
   var peer = getPeer(incoming.peer);
   peer.incoming = incoming;
   incoming.answer(myStream);
-  peer.incoming.on('stream', function(stream) {
+  
+  addVideoElement(peer.id);
+  
+  peer.incoming.on('stream', function(stream) {  
     addIncomingStream(peer, stream);
   });
+}
+
+// Create a <video> element
+function addVideoElement(peerId) {
+	$('<video autoplay />').attr("id",peerId).appendTo('body');
 }
 
 // Add the new audio stream. Either from an incoming call, or
@@ -92,21 +102,22 @@ function handleIncomingCall(incoming) {
 function addIncomingStream(peer, stream) {
   display('Adding incoming stream from ' + peer.id);
   peer.incomingStream = stream;
-  playStream(stream);
+  //playStream(stream);
+  document.querySelector("video#" + peer.id).srcObject = stream;
 }
 
 // Create an <audio> element to play the audio stream
-function playStream(stream) {
+/*function playStream(stream) {
   var audio = $('<audio autoplay />').appendTo('body');
   audio[0].src = (URL || webkitURL || mozURL).createObjectURL(stream);
-}
+}*/
 
 // Get access to the microphone
 function getLocalAudioStream(cb) {
   display('Trying to access your microphone. Please click "Allow".');
 
   navigator.getUserMedia (
-    {video: false, audio: true},
+    {video: true, audio: true},
 
     function success(audioStream) {
       display('Microphone is open.');
