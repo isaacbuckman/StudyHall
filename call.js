@@ -1,6 +1,8 @@
 var uuid = require('uuid');
 
-var calls = [];
+//var calls = [];
+
+var calls = {};
 
 function Call() {
   this.id = uuid.v1();
@@ -23,18 +25,32 @@ Call.prototype.removePeer = function(peerId) {
 
 Call.create = function() {
   var call = new Call();
-  calls.push(call);
+  //calls.push(call);
+  //this is very improper but this function will hopefully not be used in final product
+  calls[Math.random()] = call;
   return call;
 };
 
+Call.join = function(topic) {
+  console.log("joining a study group with the topic of " + topic);
+  
+  if (topic in calls) {
+	return calls[topic];
+  } else {
+	var call = new Call();
+	calls[topic] = call;
+    return call;
+  }
+};
+
 Call.get = function(id) {
-  return (calls.filter(function(call) {
+  return (Object.values(calls).filter(function(call) {
     return id === call.id;
   }) || [])[0];
 };
 
 Call.getAll = function() {
-  return calls;
+  return Object.values(calls);
 };
 
 module.exports = Call;

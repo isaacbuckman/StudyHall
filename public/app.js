@@ -103,7 +103,8 @@ function addIncomingStream(peer, stream) {
   display('Adding incoming stream from ' + peer.id);
   peer.incomingStream = stream;
   //playStream(stream);
-  document.querySelector("video#" + peer.id).srcObject = stream;
+  //document.querySelector("video#" + peer.id).srcObject = stream;
+  document.getElementById(peer.id).srcObject = stream;
 }
 
 // Create an <audio> element to play the audio stream
