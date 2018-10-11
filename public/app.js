@@ -19,6 +19,11 @@ function init() {
       if (err) return;
 
       registerIdWithServer(me.id);
+	  
+	  addVideoElement(me.id);
+	  muteVideoElement(me.id)
+	  addIncomingStream(me, myStream);
+	  
       if (call.peers.length) callPeers();
       else displayShareMessage();
     });
@@ -94,7 +99,11 @@ function handleIncomingCall(incoming) {
 
 // Create a <video> element
 function addVideoElement(peerId) {
-	$('<video autoplay />').attr("id",peerId).appendTo('body');
+	$('<video autoplay />').attr("id",peerId).appendTo('#videos');
+}
+
+function muteVideoElement(peerId) {
+	document.getElementById(peerId).muted = true;
 }
 
 // Add the new audio stream. Either from an incoming call, or
