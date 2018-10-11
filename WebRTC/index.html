@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.17/peer.min.js"></script>
+</head>
+<body>
+	<p>ID: <span id="my-id"></span></p>
+	<br>
+	ID to send to:
+	<br>
+	<input type="text" id="outgoing-id">
+	<button onclick="begin(document.getElementById('outgoing-id').value)">Send</button>
+	
+	
+	<br>
+	<br>
+	<video id = "remote-video" autoplay"></video>
+	
+	<script src="main.js"></script>
+</body>
+</html>
