@@ -34,7 +34,8 @@ function init() {
 function connectToPeerJS(cb) {
   display('Connecting to PeerJS...');
   //me = new Peer({key: API_KEY});
-  me = new Peer();
+ // me = new Peer();
+  me = new Peer({host: 'localhost', port: 6767, path: '/api', debug : 3});
 
   me.on('call', handleIncomingCall);
   
