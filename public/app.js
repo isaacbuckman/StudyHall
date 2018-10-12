@@ -33,8 +33,8 @@ function init() {
 // Connect to PeerJS and get an ID
 function connectToPeerJS(cb) {
   display('Connecting to PeerJS...');
-  //me = new Peer({key: API_KEY});
- // me = new Peer();
+  // me = new Peer();
+  //me = new Peer({host: 'localhost', port: 6767, path: '/api', debug : 3});
   me = new Peer({host: 'studyhall.online', port: 443, path: '/api', secure: true, debug : 0});
 
   me.on('call', handleIncomingCall);
