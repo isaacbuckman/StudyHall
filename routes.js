@@ -42,8 +42,9 @@ router.get('/:id.json', function(req, res) {
 // Render call page
 router.get('/:id', function(req, res) {
   var call = Call.get(req.param('id'));
-  if (!call) return res.redirect('/new');
-
+  //if (!call) return res.redirect('/new');
+  if (!call) return res.status(404).send('Call not found');
+  
   res.render('call', {
     apiKey: config.peerjs.key,
     call: call.toJSON()
