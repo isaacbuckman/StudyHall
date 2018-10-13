@@ -76,11 +76,14 @@ function callPeer(peerId) {
     display(err);
   });
 
-  addVideoElement(peerId);
+  addVideoElement(peer.id);
   
   peer.outgoing.on('stream', function(stream) {
-    display('Connected to ' + peerId + '.');
     addIncomingStream(peer, stream);
+  });
+  
+  peer.outgoing.on('close', function() {
+	removeVideoElement(peer.id);
   });
 }
 
@@ -96,11 +99,18 @@ function handleIncomingCall(incoming) {
   peer.incoming.on('stream', function(stream) {  
     addIncomingStream(peer, stream);
   });
+  
+  peer.incoming.on('close', function() {
+	removeVideoElement(peer.id);
+  });
 }
 
-// Create a <video> element
 function addVideoElement(peerId) {
 	$('<video autoplay />').attr("id",peerId).appendTo('#videos');
+}
+
+function removeVideoElement(peerId) {
+	$('#' + peerId + '').remove();
 }
 
 function muteVideoElement(peerId) {
@@ -167,3 +177,10 @@ function unsupported() {
 function display(message) {
   $('<div />').html(message).appendTo('#display');
 }
+
+window.onunload = window.onbeforeunload = function(e) {
+	if (!!me && !me.destroyed) {
+		me.destroy();
+		unregisterIdWithServer(me.id);
+	}
+};
