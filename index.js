@@ -12,15 +12,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
+//var server = app.listen(6767);
+//console.log('Listening on 6767');
 var server = app.listen(80);
 console.log('Listening on 80');
-
-/*var server = require('http').createServer(app);
-var peerserver = ExpressPeerServer(server, {debug: true});
-
-app.use('/api', peerserver);
-
-server.listen(6767);*/
 
 var options = {
     debug: false
