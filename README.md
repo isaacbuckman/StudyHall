@@ -1,6 +1,6 @@
 # StudyHall
 
-In schools around the world, students learn the same material but rarely interact with one another. StudyHall seeks to connect these students in an environment where they can study together. [StudyHall.online](https://studyhall.online)
+In schools around the nation, students learn the same material but rarely interact with one another. StudyHall seeks to connect these students in an environment where they can study together. [StudyHall.online](https://studyhall.online)
 
 ## Getting Started
 
